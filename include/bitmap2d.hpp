@@ -1,4 +1,25 @@
-#include <algorithm>
+/*
+    Copyright (c) 2023 Oliver Lau, oliver@ersatzworld.net
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+*/
+
 #include <array>
 #include <cstdlib>
 #include <string>
@@ -15,7 +36,6 @@ public:
         static_assert(std::is_integral<BaseT>::value, "Integral required for BaseT.");
         static_assert(std::is_unsigned<BaseT>::value, "Unsigned integral required for BaseT.");
         static_assert(Rows > 0 && Cols > 0, "Number of rows and columns must be greater than 0.");
-        std::fill(data_.begin(), data_.end(), 0);
     }
 
     void set(size_t row, size_t col, bool val)
@@ -66,7 +86,7 @@ public:
 #endif
         size_t const idx = (row * Cols + col) / (sizeof(BaseT) * CHAR_BIT);
         size_t const shift = (row * Cols + col) % (sizeof(BaseT) * CHAR_BIT);
-        BaseT result = data_.at(idx) & (static_cast<BaseT>(1) << shift);
+        BaseT const result = data_.at(idx) & (static_cast<BaseT>(1) << shift);
         return result != static_cast<BaseT>(0);
     }
 
@@ -96,5 +116,5 @@ public:
     }
 
 private:
-    std::array<BaseT, std::max(1UL, Rows *Cols / (sizeof(BaseT) * CHAR_BIT))> data_;
+    std::array<BaseT, std::max(1UL, Rows *Cols / (sizeof(BaseT) * CHAR_BIT))> data_{0};
 };
