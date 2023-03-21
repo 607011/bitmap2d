@@ -70,6 +70,11 @@ public:
         return result != static_cast<BaseT>(0);
     }
 
+    inline bool operator()(size_t row, size_t col) const
+    {
+        return get(row, col);
+    }
+
     inline constexpr size_t rows() const noexcept
     {
         return Rows;

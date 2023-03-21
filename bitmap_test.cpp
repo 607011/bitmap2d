@@ -187,6 +187,6 @@ TEST(PatternTest, Diagonal)
     }
     for (size_t i = 0; i < a.cols(); ++i)
     {
-        ASSERT_FALSE(a.get(i, i));
+        ASSERT_FALSE(a(i, i));
     }
 }
