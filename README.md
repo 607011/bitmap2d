@@ -3,7 +3,7 @@
 **A C++ library for two-dimensional bit sets**
 
 This library implements a class to store, manipulate and query 2D bit sets.
-By default te data is stored in `size_t`, but this base type can be any other unsigned integral type like `unsigned char` or `unsigned short`.
+By default the data is stored in `size_t`, but this base type can be any other unsigned integral type like `unsigned char` or `unsigned short`.
 
 ## Build
 
