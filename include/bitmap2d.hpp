@@ -31,6 +31,8 @@ template <size_t Rows, size_t Cols, typename BaseT = size_t>
 class bitmap2d
 {
 public:
+    typedef BaseT size_type;
+
     bitmap2d()
     {
         static_assert(std::is_integral<BaseT>::value, "Integral required for BaseT.");
@@ -95,6 +97,17 @@ public:
         return get(row, col);
     }
 
+#if __cplusplus > 202002L
+    inline bool &operator[](size_t row, size_t col)
+    {
+        return get(row, col);
+    }
+    inline bool const &operator[](size_t row, size_t col) const
+    {
+        return get(row, col);
+    }
+#endif
+
     inline constexpr size_t rows() const noexcept
     {
         return Rows;
@@ -113,6 +126,11 @@ public:
     inline constexpr size_t size() const noexcept
     {
         return data_.size();
+    }
+
+    inline void clear() noexcept
+    {
+        std::fill(data_.begin(), data_.end(), 0U);
     }
 
 private:
